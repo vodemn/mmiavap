@@ -4,7 +4,7 @@ import 'package:lab7/seq.dart';
 
 void main() {
   print('Алгоритм случайного поиска\n');
-  randomMethod(ELEMENTS, 100);
+  randomMethod(ELEMENTS, 500);
   print('\nАлгоритм последовательного поиска\n');
   sequential(ELEMENTS);
 }

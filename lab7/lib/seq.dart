@@ -213,7 +213,7 @@ Map<List<Element>, List<int>> _fixPositions(List<Element> elements, List<int> po
 
   if (itemIndex != posIndex) {
     print('В условии задано, что соединитель (мы выбрали элемент с индексом 1 в качестве соединителя) должен быть на 1 позиции.\nДля этого скорректируем вектор очередности размещения элементов так, чтобы выполнялось условие.');
-    elements.swap(0, 1);
+    elements.swap(itemIndex, posIndex);
   }
   
   print('Вектор очередности позиций');
