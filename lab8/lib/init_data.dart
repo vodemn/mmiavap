@@ -35,15 +35,15 @@ final Element SEVEN = Element(
     fifth: Coord(26 + 1, 6));
 
 List<Line> LINES = [
-  Line('a', ONE.first, TWO.second),
-  Line('b', THREE.second, TWO.fifth),
-  Line('c', ONE.fourth, THREE.fifth),
-  Line('d', ONE.second, FOUR.second),
-  Line('e', FIVE.second, FOUR.fifth),
-  Line('f', ONE.fifth, FIVE.fifth),
-  Line('g', ONE.third, SIX.second),
-  Line('h', SIX.fifth, SEVEN.second),
-  Line('i', FIVE.first, SEVEN.fifth)
+  Line('a', TWO.second, ONE.first),
+  Line('b', TWO.fifth, THREE.second),
+  Line('c', THREE.fifth, ONE.fourth),
+  Line('d', FOUR.second, ONE.second),
+  Line('e', FOUR.fifth, FIVE.second),
+  Line('f', FIVE.fifth, ONE.fifth),
+  Line('g', SIX.second, ONE.third),
+  Line('h', SEVEN.second, SIX.fifth),
+  Line('i', SEVEN.fifth, FIVE.first)
 ];
 
 Matrix<Cell> generateInitFront() {

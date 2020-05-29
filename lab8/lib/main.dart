@@ -87,30 +87,14 @@ bool _spreadWave(Matrix<Cell> matrix, Coord currentCoord, Coord end) {
     matrix.forEach((item) {
       if (item.weight == i) {
         Coord currentCoord = item.coord;
-        resultD = _checkCell(matrix, currentCoord.down(), end, i + 1);
-        if (resultD == null) {
-          foundEnd = true;
-        } else {
-          found++;
-        }
-        resultL = _checkCell(matrix, currentCoord.left(), end, i + 1);
-        if (resultL == null) {
-          foundEnd = true;
-        } else {
-          found++;
-        }
         resultR = _checkCell(matrix, currentCoord.right(), end, i + 1);
-        if (resultR == null) {
-          foundEnd = true;
-        } else {
-          found++;
-        }
+        resultR == null ? foundEnd = true : found++;
         resultU = _checkCell(matrix, currentCoord.up(), end, i + 1);
-        if (resultU == null) {
-          foundEnd = true;
-        } else {
-          found++;
-        }
+        resultU == null ? foundEnd = true : found++;
+        resultL = _checkCell(matrix, currentCoord.left(), end, i + 1);
+        resultL == null ? foundEnd = true : found++;
+        resultD = _checkCell(matrix, currentCoord.down(), end, i + 1);
+        resultD == null ? foundEnd = true : found++;
       }
     });
     if (found == 0) {
@@ -148,41 +132,35 @@ int _buildConnection(Matrix<Cell> matrix, Coord start, Coord end, String name) {
   bool resultL;
   bool resultR;
   bool resultU;
-
   Coord currentCoord = end;
-
   int length = 0;
-
   while (currentCoord.x != start.x || currentCoord.y != start.y) {
-    resultD = _buildConnectionSegment(matrix, currentCoord, currentCoord.down(), name);
+    resultD = _buildConnectionSegment(matrix, currentCoord, currentCoord.right(), name);
     if (!resultD) {
-      resultL = _buildConnectionSegment(matrix, currentCoord, currentCoord.left(), name);
+      resultL = _buildConnectionSegment(matrix, currentCoord, currentCoord.up(), name);
       if (!resultL) {
-        resultR = _buildConnectionSegment(matrix, currentCoord, currentCoord.right(), name);
+        resultR = _buildConnectionSegment(matrix, currentCoord, currentCoord.left(), name);
         if (!resultR) {
-          resultU = _buildConnectionSegment(matrix, currentCoord, currentCoord.up(), name);
+          resultU = _buildConnectionSegment(matrix, currentCoord, currentCoord.down(), name);
           if (resultU) {
-            currentCoord = currentCoord.up();
+            currentCoord = currentCoord.down();
             length++;
           }
         } else {
-          currentCoord = currentCoord.right();
+          currentCoord = currentCoord.left();
             length++;
         }
       } else {
-        currentCoord = currentCoord.left();
+        currentCoord = currentCoord.up();
             length++;
       }
     } else {
-      currentCoord = currentCoord.down();
+      currentCoord = currentCoord.right();
       length++;
     }
   }
-  matrix[end.y][end.x].occupy();
-  matrix[end.y][end.x].key = name;
   matrix[start.y][start.x].occupy();
   matrix[start.y][start.x].key = name;
-
   return length;
 }
 
@@ -199,6 +177,5 @@ bool _buildConnectionSegment(Matrix<Cell> matrix, Coord cur, Coord to, String na
       }
     }
   }
-
   return success;
 }
